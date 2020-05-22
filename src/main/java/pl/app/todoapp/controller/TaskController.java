@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import pl.app.todoapp.model.Task;
 import pl.app.todoapp.model.TaskRepository;
 
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -17,6 +19,11 @@ class TaskController {
 
     TaskController(final TaskRepository repository) {
         this.repository = repository;
+    }
+    @PostMapping("/tasks")
+    ResponseEntity<Task> createTask(@RequestBody @Valid Task toCreate) {
+        Task result = repository.save(toCreate);
+        return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
     }
 
     @GetMapping(value = "/tasks",params ={"!sort", "!page","!size"})
