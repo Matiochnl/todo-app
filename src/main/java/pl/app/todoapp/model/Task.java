@@ -17,6 +17,18 @@ public class Task {
     public Task() {
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
+    }
+
     public int getId() {
         return id;
     }
