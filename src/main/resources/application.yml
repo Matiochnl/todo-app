@@ -1,0 +1,7 @@
+spring:
+  h2.console:
+    enabled: true
+    path: '/console'
+datasource:
+  url: 'jdbc:h2:file:/home/mateusz/Desktop/app/todo-app/db'
+task.allowMultipleTasksFromTemplate: false
