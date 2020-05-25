@@ -20,6 +20,7 @@ class TaskController {
     TaskController(final TaskRepository repository) {
         this.repository = repository;
     }
+
     @PostMapping("/tasks")
     ResponseEntity<Task> createTask(@RequestBody @Valid Task toCreate) {
         Task result = repository.save(toCreate);
