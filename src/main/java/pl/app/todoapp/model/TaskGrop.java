@@ -4,26 +4,24 @@ package pl.app.todoapp.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
-@Table(name = "tasks")
-public class Task {
+@Table(name = "task_groups")
+public class TaskGrop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @NotBlank(message = "Task`s description must not be empty")
+    @NotBlank(message = "Task group`s description must not be empty")
     private String description;
     private boolean done;
-    private LocalDateTime deadline;
     @Embedded
     private Audit audit = new Audit() {};
-    @ManyToOne
-    @JoinColumn(name = "task_group_id")
-    private TaskGrop group;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
+    private Set<Task> tasks;
 
 
-
-    public Task() {
+    public TaskGrop() {
     }
 
     void setId(int id) {
@@ -50,28 +48,11 @@ public class Task {
         return done;
     }
 
-    public LocalDateTime getDeadline() {
-        return deadline;
+    public Set<Task> getTasks() {
+        return tasks;
     }
 
-    public void setDeadline(LocalDateTime deadline) {
-        this.deadline = deadline;
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
     }
-
-    public TaskGrop getGroup() {
-        return group;
-    }
-
-    public void setGroup(TaskGrop group) {
-        this.group = group;
-    }
-
-    public void updateFrom(final Task source){
-        description = source.description;
-        done = source.done;
-        deadline = source.deadline;
-        group = source.group;
-    }
-
-
 }
