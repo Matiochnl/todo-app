@@ -1,7 +1,13 @@
 package pl.app.todoapp.model;
 
-
-import javax.persistence.*;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
@@ -9,69 +15,70 @@ import java.time.LocalDateTime;
 @Table(name = "tasks")
 public class Task {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @NotBlank(message = "Task`s description must not be empty")
+    @NotBlank(message = "Task's description must not be empty")
     private String description;
     private boolean done;
     private LocalDateTime deadline;
     @Embedded
-    private Audit audit = new Audit() {};
+    private Audit audit = new Audit();
     @ManyToOne
     @JoinColumn(name = "task_group_id")
-    private TaskGrop group;
+    private TaskGroup group;
 
-
-
-    public Task() {
+    Task() {
     }
 
-    void setId(int id) {
-        this.id = id;
-    }
-
-    public void setDescription(String description) {
+    public Task(String description, LocalDateTime deadline) {
         this.description = description;
-    }
-
-    public void setDone(boolean done) {
-        this.done = done;
+        this.deadline = deadline;
     }
 
     public int getId() {
         return id;
     }
 
+    void setId(final int id) {
+        this.id = id;
+    }
+
     public String getDescription() {
         return description;
+    }
+
+    void setDescription(final String description) {
+        this.description = description;
     }
 
     public boolean isDone() {
         return done;
     }
 
+    public void setDone(final boolean done) {
+        this.done = done;
+    }
+
     public LocalDateTime getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(LocalDateTime deadline) {
+    void setDeadline(final LocalDateTime deadline) {
         this.deadline = deadline;
     }
 
-    public TaskGrop getGroup() {
+    TaskGroup getGroup() {
         return group;
     }
 
-    public void setGroup(TaskGrop group) {
+    void setGroup(final TaskGroup group) {
         this.group = group;
     }
 
-    public void updateFrom(final Task source){
+    public void updateFrom(final Task source) {
         description = source.description;
         done = source.done;
         deadline = source.deadline;
         group = source.group;
     }
-
-
 }

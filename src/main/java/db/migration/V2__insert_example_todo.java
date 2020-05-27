@@ -6,12 +6,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 
 public class V2__insert_example_todo extends BaseJavaMigration {
-
-
     @Override
-    public void migrate(Context context) {
-        new JdbcTemplate(new SingleConnectionDataSource(context.getConnection(),true))
-                .execute("insert into tasks (description, done) value ('Java migrations', true)");
-
+    public void migrate(final Context context) {
+        new JdbcTemplate(new SingleConnectionDataSource(context.getConnection(), true))
+                .execute("insert into tasks (description, done) values ('Java migrations', true)");
     }
 }
