@@ -1,24 +1,38 @@
 package pl.app.todoapp.model.projection;
 
+import pl.app.todoapp.model.TaskGroup;
+
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class GroupWriteModel {
-    private String decription;
-    private Set<GroupWriteModel> tasks;
+    private String description;
+    private Set<GroupTaskWriteModel> tasks;
 
-    public String getDecription() {
-        return decription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDecription(String decription) {
-        this.decription = decription;
+    public void setDescription(final String description) {
+        this.description = description;
     }
 
-    public Set<GroupWriteModel> getTasks() {
+    public Set<GroupTaskWriteModel> getTasks() {
         return tasks;
     }
 
-    public void setTasks(Set<GroupWriteModel> tasks) {
+    public void setTasks(final Set<GroupTaskWriteModel> tasks) {
         this.tasks = tasks;
+    }
+
+    public TaskGroup toGroup() {
+        var result = new TaskGroup();
+        result.setDescription(description);
+        result.setTasks(
+                tasks.stream()
+                        .map(GroupTaskWriteModel::toTask)
+                        .collect(Collectors.toSet())
+        );
+        return result;
     }
 }
