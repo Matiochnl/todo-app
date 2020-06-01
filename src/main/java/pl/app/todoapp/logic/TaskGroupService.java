@@ -1,7 +1,7 @@
 package pl.app.todoapp.logic;
 
 import org.springframework.stereotype.Service;
-import pl.app.todoapp.TaskConfigurationProperties;
+import org.springframework.web.context.annotation.RequestScope;
 import pl.app.todoapp.model.TaskGroup;
 import pl.app.todoapp.model.TaskGroupRepository;
 import pl.app.todoapp.model.TaskRepository;
@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 
 @Service
+@RequestScope
 public class TaskGroupService {
     private TaskGroupRepository repository;
     private TaskRepository taskRepository;
