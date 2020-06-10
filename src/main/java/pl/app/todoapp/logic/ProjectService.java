@@ -1,6 +1,5 @@
 package pl.app.todoapp.logic;
 
-import org.springframework.stereotype.Service;
 import pl.app.todoapp.TaskConfigurationProperties;
 import pl.app.todoapp.model.*;
 import pl.app.todoapp.model.projection.GroupReadModel;
@@ -9,7 +8,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service
 public class ProjectService {
     private ProjectRepository repository;
     private TaskGroupRepository taskGroupRepository;
