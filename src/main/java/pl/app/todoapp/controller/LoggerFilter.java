@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 @Component
 public class LoggerFilter  implements Filter {
@@ -13,5 +14,10 @@ public class LoggerFilter  implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
+        if(request instanceof HttpServletRequest){
+            var httprequest = (HttpServletRequest) request;
+            logger.info("[doFilter]" + httprequest.getMethod() + " " + httprequest.getRequestURI());
+        }
+        chain.doFilter(request, response);
     }
 }
