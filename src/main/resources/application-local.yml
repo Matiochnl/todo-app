@@ -3,8 +3,13 @@ spring:
     enabled: true
     path: '/console'
   datasource:
-    url: 'jdbc:h2:file:/home/mateusz/Desktop/orgin/original/todo-app/todo-db'
+    url: 'jdbc:h2:file:/home/mateusz/Desktop/apka/todo-app/todo-db'
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
 tipleTasksFromTemplate: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
