@@ -1,5 +1,6 @@
 package pl.app.todoapp.logic;
 
+import pl.app.todoapp.model.Project;
 import pl.app.todoapp.model.TaskGroup;
 import pl.app.todoapp.model.TaskGroupRepository;
 import pl.app.todoapp.model.TaskRepository;
@@ -20,7 +21,11 @@ public class TaskGroupService {
     }
 
     public GroupReadModel createGroup(final GroupWriteModel source) {
-        TaskGroup result = repository.save(source.toGroup());
+        return createGroup(source, null);
+    }
+
+    GroupReadModel createGroup(final GroupWriteModel source, final Project project) {
+        TaskGroup result = repository.save(source.toGroup(project));
         return new GroupReadModel(result);
     }
 
