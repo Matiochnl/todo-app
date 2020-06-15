@@ -8,12 +8,22 @@
 </head>
 <body>
 <main>
-    <form action="#" method="post" th:action="@{/projects}">
+    <!--/*@thymesVar id="project" type="pl.app.todoapp.model.projection.ProjectWriteModel"*/-->
+    <form action="#" method="post" th:action="@{/projects}" th:object="${project}">
     <fieldset>
         <legend>Nowy projekt</legend>
         <label>Opis
-            <input type="text" />
+            <input th:field="*{description}" type="text"/>
         </label>
+        <fieldset>
+            <legend>Krok 1</legend>
+            <label>Opis
+                <input th:field="*{steps[0].description}" type="text"/>
+            </label>
+            <label>Dni przed koncem projektu
+            <input th:field="*{steps[0].daysToDeadline}" type="text"/>
+        </label>
+        </fieldset>
     </fieldset>
     </form>
 </main>
