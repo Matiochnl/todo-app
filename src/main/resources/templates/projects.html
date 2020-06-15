@@ -8,6 +8,7 @@
 </head>
 <body>
 <main>
+    <h1 th:if="message != null" th:text="${message}"></h1>
     <!--/*@thymesVar id="project" type="pl.app.todoapp.model.projection.ProjectWriteModel"*/-->
     <form action="#" method="post" th:action="@{/projects}" th:object="${project}">
     <fieldset>
@@ -18,10 +19,10 @@
         <fieldset th:each="step, stepStat: *{steps}">
             <legend th:text="|Krok ${stepStat.index + 1}|"></legend>
             <label>Opis
-                <input th:field="*{steps[__${stepStat.index}__].description}" type="text" />
+                <input th:field="*{steps[__${stepStat.index}__].description}" type="text"  />
             </label>
             <label>Dni przed koncem projektu
-            <input th:field="*{steps[__${stepStat.index}__].daysToDeadline}" type="number" />
+            <input th:field="*{steps[__${stepStat.index}__].daysToDeadline}"  type="number" />
         </label>
         </fieldset>
         <div>
