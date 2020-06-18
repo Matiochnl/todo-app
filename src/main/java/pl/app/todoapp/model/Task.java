@@ -1,5 +1,7 @@
 package pl.app.todoapp.model;
 
+import org.springframework.boot.autoconfigure.security.servlet.WebSecurityEnablerConfiguration;
+
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

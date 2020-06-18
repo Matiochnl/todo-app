@@ -3,23 +3,35 @@ package pl.app.todoapp.model.projection;
 import pl.app.todoapp.model.Project;
 import pl.app.todoapp.model.TaskGroup;
 
-import java.util.Set;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class GroupWriteModel {
+    @NotBlank(message = "Task group's description must not be empty")
     private String description;
-    private Set<GroupTaskWriteModel> tasks;
+    @Valid
+    private List<GroupTaskWriteModel> tasks = new ArrayList<>();
 
-    public String getDescription() { return description;
+    public GroupWriteModel() {
+        tasks.add(new GroupTaskWriteModel());
     }
 
-    public void setDescription(final String description) { this.description = description;
+    public String getDescription() {
+        return description;
     }
 
-    public Set<GroupTaskWriteModel> getTasks() { return tasks;
+    public void setDescription(final String description) {
+        this.description = description;
     }
 
-    public void setTasks(final Set<GroupTaskWriteModel> tasks) {
+    public List<GroupTaskWriteModel> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(final List<GroupTaskWriteModel> tasks) {
         this.tasks = tasks;
     }
 
