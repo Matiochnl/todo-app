@@ -1,6 +1,8 @@
 package pl.app.todoapp.model;
 
 
+import pl.app.todoapp.model.event.TaskEvent;
+
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -63,8 +65,9 @@ public class Task {
         return done;
     }
 
-    public void setDone(final boolean done) {
-        this.done = done;
+    public TaskEvent toggle() {
+        this.done = !this.done;
+        return TaskEvent.changed(this);
     }
 
     public LocalDateTime getDeadline() {
