@@ -12,4 +12,9 @@ management:
   endpoints:
     web:
       exposure:
-        include: '*'
+        include: '*'e
+keycloak:
+  auth-server-url: 'http://localhost:8180/auth'
+  realm: 'TodoApp'
+  resource: 'todo-app-client'
+  public-client: true
